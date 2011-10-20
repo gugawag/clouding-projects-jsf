@@ -1,6 +1,7 @@
 package com.gugawag.cloudingprojects.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,7 @@ public class Aluno implements Serializable {
 	private List<Projeto> projetos;
 
 	public Aluno() {
-		super();
+		this(null, null, null, null);
 	}
 
 	public Aluno(String matricula, String nome, String login, String senha) {
@@ -38,6 +39,7 @@ public class Aluno implements Serializable {
 		this.login = login;
 		this.senha = senha;
 		this.matricula = matricula;
+		projetos = new ArrayList<Projeto>();
 	}
 
 	public String getMatricula() {
