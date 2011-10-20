@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import com.gugawag.cloudingprojects.bd.AlunoManager;
 import com.gugawag.cloudingprojects.modelo.Aluno;
 import com.gugawag.cloudingprojects.modelo.AlunoJahMatriculadoException;
+import com.gugawag.cloudingprojects.modelo.Projeto;
 
 @ManagedBean
 @SessionScoped
@@ -32,16 +33,10 @@ public class AlunoBean {
 
 	public String cadastrar() {
 		try {
-			alunoManager.acrescentaAtualizaUsuario(new Aluno(aluno.getMatricula(), 
-					aluno.getNome(), aluno.getLogin(), aluno.getSenha()));
+			aluno.acrescentaProjeto(new Projeto("Proj1", "http://proj1"));
+			alunoManager.acrescentaAtualizaUsuario(aluno);
 			Aluno alunoRecuperado = alunoManager.getAlunoPorMatricula(aluno.getMatricula());
-			System.out.println(alunoRecuperado);
-			alunoRecuperado.setNome("ALTERADO");
-			alunoRecuperado.setMatricula("MAT ALTERADa");
-			alunoManager.acrescentaAtualizaUsuario(alunoRecuperado);
-			
-			alunoRecuperado = alunoManager.getAlunoPorMatricula(aluno.getMatricula());
-			System.out.println(alunoRecuperado);
+			System.out.println("Quant projetos:" + alunoRecuperado.getProjetos().size());
 		} catch (AlunoJahMatriculadoException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));

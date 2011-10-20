@@ -4,19 +4,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 /**
  * Classe que representa um projeto no sistema Clouding Projects.
  * @author gugawag, gugawag@gmail.com
  *
  */
+@Entity
 public class Projeto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue
 	private Integer codigo;
 	private String nome;
 	private String url;
 	
+	@Transient
 	private List<Entrega> entregas;
+	@Transient
 	private List<Cliente> clientes;
 	
 	public Projeto() {

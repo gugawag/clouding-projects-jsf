@@ -1,0 +1,1 @@
+- O documento de vis‹o, bem como as entregas a serem realizadas deste projeto, encontram-se descritos no wiki deste projeto no github. 

@@ -3,10 +3,12 @@ package com.gugawag.cloudingprojects.modelo;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Aluno implements Serializable {
@@ -23,7 +25,7 @@ public class Aluno implements Serializable {
 
 	// Transiente significa que não será armazenado no banco de dados. Remover
 	// essa anotação após mapear Projeto com JPA
-	@Transient
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Projeto> projetos;
 
 	public Aluno() {
@@ -84,6 +86,10 @@ public class Aluno implements Serializable {
 
 	public void setProjetos(List<Projeto> projetos) {
 		this.projetos = projetos;
+	}
+	
+	public void acrescentaProjeto(Projeto projeto){
+		this.projetos.add(projeto);
 	}
 
 	public String toString() {
