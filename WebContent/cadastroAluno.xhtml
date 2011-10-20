@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head></h:head> 
+<body> 
+	<h:form>
+		Nome: <h:inputText value="#{alunoBean.aluno.nome}" required="true" id="nome">
+				<f:ajax event="blur" render="mensagensNome" execute="nome"/>
+			  </h:inputText> <h:message for="nome" id="mensagensNome"/>
+		<br/>
+		Matrícula: <h:inputText value="#{alunoBean.aluno.matricula}" required="true" id="matricula">
+					<f:ajax event="blur" render="mensagensMatricula" execute="matricula"/>
+				   </h:inputText> <h:message for="matricula" id="mensagensMatricula"/>
+		<br/>
+		Login: <h:inputText value="#{alunoBean.aluno.login}" required="true" id="login"/><br/>
+		Senha: <h:inputText value="#{alunoBean.aluno.senha}" required="true" id="senha"/><br/>
+		<h:commandButton action="#{alunoBean.cadastrar}" value="Cadastrar"/>
+		
+	</h:form>
+	<h:messages id="mensagens"/>
+</body> 
+</html>
