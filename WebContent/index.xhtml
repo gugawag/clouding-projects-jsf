@@ -2,7 +2,8 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<title>Index</title>
@@ -10,12 +11,9 @@
 </h:head>
 
 <h:body>
+  <ui:composition template="/template-padrao.xhtml">
 
+  </ui:composition>
 
-	<h:form>
-		<h:commandButton action="#{alunoBean.enviar}" value="Vai" />
-	</h:form>
-	
-	<h:messages />
 </h:body>
 </html>

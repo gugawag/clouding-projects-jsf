@@ -1,5 +1,7 @@
 package com.gugawag.cloudingprojects.beans;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -8,8 +10,8 @@ import javax.faces.context.FacesContext;
 
 import com.gugawag.cloudingprojects.bd.AlunoManager;
 import com.gugawag.cloudingprojects.modelo.Aluno;
+import com.gugawag.cloudingprojects.modelo.AlunoInexistenteException;
 import com.gugawag.cloudingprojects.modelo.AlunoJahMatriculadoException;
-import com.gugawag.cloudingprojects.modelo.Projeto;
 
 @ManagedBean
 @SessionScoped
@@ -18,8 +20,9 @@ public class AlunoBean {
 	@EJB
 	private AlunoManager alunoManager;
 	private Aluno aluno;
-	
-	public AlunoBean(){
+	private List<Aluno> alunosARemover;
+
+	public AlunoBean() {
 		aluno = new Aluno();
 	}
 
@@ -33,15 +36,32 @@ public class AlunoBean {
 
 	public String cadastrar() {
 		try {
-			aluno.acrescentaProjeto(new Projeto("Proj1", "http://proj1"));
 			alunoManager.acrescentaAtualizaUsuario(aluno);
-			Aluno alunoRecuperado = alunoManager.getAlunoPorMatricula(aluno.getMatricula());
-			System.out.println("Quant projetos:" + alunoRecuperado.getProjetos().size());
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Aluno matriculado!"));
 		} catch (AlunoJahMatriculadoException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
 		}
 		return null;
+	}
+
+	public List<Aluno> getAlunos() {
+		return alunoManager.getAlunos();
+	}
+
+	public void setAlunosARemover(List<Aluno> alunosARemover) {
+		this.alunosARemover = alunosARemover;
+	}
+
+	public void removerAlunos() {
+		try {
+			alunoManager.removeAlunoPorMatricula(this.aluno.getMatricula());
+		} catch (AlunoInexistenteException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(e.getMessage()));
+
+		}
 	}
 
 }

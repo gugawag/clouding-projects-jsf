@@ -23,6 +23,7 @@
 	<param-value>blueSky</param-value>
  </context-param>
 
+
  <welcome-file-list>
   <welcome-file>index.xhtml</welcome-file>
   <welcome-file>index.htm</welcome-file>
@@ -31,4 +32,6 @@
   <welcome-file>default.htm</welcome-file>
   <welcome-file>default.jsp</welcome-file>
  </welcome-file-list>
+ 
+
 </web-app>
