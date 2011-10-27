@@ -3,6 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
 
 <h:head>
 <title><ui:insert name="titulo">Título da página</ui:insert></title>
@@ -41,9 +42,9 @@ body {
 	  </ui:insert>
   </div>
 
+<!--  Tirei esta área pois, não sei o porquê, toda página já está incluindo sua mensagem. -->
   <div id="areaMensagens">
 	  <ui:insert name="areaMensagens">
-		<h:messages id="mensagens"/>
 	  </ui:insert>
   </div>
 

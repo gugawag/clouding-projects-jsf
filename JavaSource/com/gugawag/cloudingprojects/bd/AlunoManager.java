@@ -3,7 +3,6 @@ package com.gugawag.cloudingprojects.bd;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -52,5 +51,14 @@ public class AlunoManager implements Serializable{
 			throw new AlunoInexistenteException("O usu‡rio com matr’cula [" + matricula+ "] n‹o existe!");
 		}
 		em.remove(alunoARemover);
+	}
+
+	public Aluno pesquisarAlunoPorNome(String nome) {
+		List<Aluno> alunos = (List<Aluno>)em.createQuery("from Aluno a where a.nome=:nome").setParameter("nome", nome).getResultList();
+		if ((alunos != null) && (alunos.size()>0)){
+			return alunos.get(0);
+		}
+		return null;
+
 	}
 }

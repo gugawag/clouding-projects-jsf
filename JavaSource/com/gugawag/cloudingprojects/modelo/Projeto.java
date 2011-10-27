@@ -14,13 +14,10 @@ import javax.persistence.Transient;
  * @author gugawag, gugawag@gmail.com
  *
  */
-@Entity
 public class Projeto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue
 	private Integer codigo;
 	private String nome;
 	private String url;

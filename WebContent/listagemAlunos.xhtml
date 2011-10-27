@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich=" http://richfaces.org/rich">
+
+<h:head></h:head>
+<body>
+
+<!-- Herdando do template e definindo a ahrea principal -->
+	<ui:composition template="/template-padrao.xhtml">
+		<ui:define name="principal">
+			<h:form>
+				<h:dataTable var="aluno" value="#{alunoBean.alunos}" border="1">
+					<f:facet name="header">
+						<h:column>
+							Matrícula
+						</h:column>
+						<h:column>
+							Nome
+						</h:column>					
+					</f:facet>
+					
+					<h:column>#{aluno.matricula}</h:column>
+					<h:column>#{aluno.nome}</h:column>
+					
+					<f:facet name="footer">
+						<h:column>
+							Total: Colocar aqui o total
+						</h:column>
+					</f:facet>
+				</h:dataTable>
+				
+				<br/>
+				<h:selectManyCheckbox id="alunosRemover"
+ 		value="#{alunoBean.matriculasAlunosRemover}"> <f:selectItems value="#{alunoBean.alunosMap.keySet}"/>
+		</h:selectManyCheckbox>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
