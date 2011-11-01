@@ -11,17 +11,17 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import com.gugawag.cloudingprojects.bd.AlunoManager;
 import com.gugawag.cloudingprojects.modelo.Aluno;
 import com.gugawag.cloudingprojects.modelo.AlunoInexistenteException;
 import com.gugawag.cloudingprojects.modelo.AlunoJahMatriculadoException;
+import com.gugawag.cloudingprojects.service.AlunoService;
 
 @ManagedBean
 @SessionScoped
 public class AlunoBean {
 
 	@EJB
-	private AlunoManager alunoManager;
+	private AlunoService alunoService;
 	
 	private Aluno aluno, alunoPesquisado;
 	private List<String> matriculasAlunosRemover;
@@ -35,7 +35,7 @@ public class AlunoBean {
 
 	@PostConstruct
 	public void test(){
-		List<Aluno> alunos = alunoManager.getAlunos();
+		List<Aluno> alunos = alunoService.getAlunos();
 		for(Aluno aluno: alunos){
 			alunosMap.put(aluno.getMatricula(), aluno);
 		}
@@ -63,7 +63,7 @@ public class AlunoBean {
 	}
 
 	public List<Aluno> getAlunos() {
-		return alunoManager.getAlunos();
+		return alunoService.getAlunos();
 	}
 
 	public void setMatriculasAlunosRemover(List<String> matriculasAlunosRemover) {
@@ -85,7 +85,7 @@ public class AlunoBean {
 	public String cadastrar() {
 
 		try {
-			alunoManager.acrescentaAtualizaUsuario(aluno);
+			alunoService.acrescentaAtualizaUsuario(aluno);
 			//TODO trocar abaixo por mensagem do MessageFactory
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Aluno cadastrado"));
 		} catch (AlunoJahMatriculadoException e) {
@@ -97,7 +97,7 @@ public class AlunoBean {
 	
 	public void removerAlunos() {
 		try {
-			alunoManager.removeAlunoPorMatricula(this.aluno.getMatricula());
+			alunoService.removeAlunoPorMatricula(this.aluno.getMatricula());
 		} catch (AlunoInexistenteException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
@@ -106,11 +106,12 @@ public class AlunoBean {
 	}
 	
 	public String pesquisarPorNome(){
-		this.alunoPesquisado = alunoManager.pesquisarAlunoPorNome(this.alunoPesquisado.getNome());
+		this.alunoPesquisado = alunoService.getAlunoPorNome(this.alunoPesquisado.getNome());
 		if (alunoPesquisado == null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Nenhum aluno foi encontrado!"));
 		}
 		return null;
 	}
+	
 
 }

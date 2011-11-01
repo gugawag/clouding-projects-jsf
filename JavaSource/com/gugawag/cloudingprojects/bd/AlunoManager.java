@@ -21,11 +21,6 @@ public class AlunoManager implements Serializable{
 	private EntityManager em;
 	
 	public void acrescentaAtualizaUsuario(Aluno aluno) throws AlunoJahMatriculadoException{
-		Aluno alunoAInserir = getAlunoPorMatricula(aluno.getMatricula());
-		if (alunoAInserir != null){
-			throw new AlunoJahMatriculadoException("O aluno de matr’cula [" + alunoAInserir.getMatricula() +"]" +
-					"j‡ est‡ cadastrado!");
-		}
 		if (aluno.getCodigo() != null){
 			em.merge(aluno);
 		} else{
@@ -45,15 +40,11 @@ public class AlunoManager implements Serializable{
 		return null;
 	}
 	
-	public void removeAlunoPorMatricula(String matricula) throws AlunoInexistenteException{
-		Aluno alunoARemover = getAlunoPorMatricula(matricula);
-		if (alunoARemover == null){
-			throw new AlunoInexistenteException("O usu‡rio com matr’cula [" + matricula+ "] n‹o existe!");
-		}
-		em.remove(alunoARemover);
+	public void removeAlunoPorMatricula(Aluno aluno) throws AlunoInexistenteException{
+		em.remove(aluno);
 	}
 
-	public Aluno pesquisarAlunoPorNome(String nome) {
+	public Aluno getAlunoPorNome(String nome) {
 		List<Aluno> alunos = (List<Aluno>)em.createQuery("from Aluno a where a.nome=:nome").setParameter("nome", nome).getResultList();
 		if ((alunos != null) && (alunos.size()>0)){
 			return alunos.get(0);

@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
+@Table(name="TB_ALUNO")
 public class Aluno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,6 +20,7 @@ public class Aluno implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer codigo;
+	@Column(name="mt")
 	private String matricula;
 	private String nome;
 	private String login;
@@ -27,7 +28,7 @@ public class Aluno implements Serializable {
 
 	// Transiente significa que não será armazenado no banco de dados. Remover
 	// essa anotação após mapear Projeto com JPA
-	@Transient
+	@Transient 
 	private List<Projeto> projetos;
 
 	public Aluno() {
