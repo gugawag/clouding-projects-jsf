@@ -40,7 +40,7 @@ public class AlunoBean {
 		this.aluno = aluno;
 	}
 
-	public DataModel<Aluno> getAlunos() {
+	public DataModel getAlunos() {
 		return (dmAlunos = new ListDataModel(alunoService.getAlunos())); 
 	}
 
