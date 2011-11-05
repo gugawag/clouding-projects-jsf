@@ -20,11 +20,16 @@
 						</h:column>
 						<h:column>
 							Nome
+						</h:column>
+						<h:column>
+							Apagar?
 						</h:column>					
+											
 					</f:facet>
-					
+
 					<h:column>#{aluno.matricula}</h:column>
 					<h:column>#{aluno.nome}</h:column>
+					<h:column><h:commandLink value="X" action="#{alunoBean.removerAluno}"/></h:column>
 					
 					<f:facet name="footer">
 						<h:column>
@@ -32,11 +37,7 @@
 						</h:column>
 					</f:facet>
 				</h:dataTable>
-				
 				<br/>
-				<h:selectManyCheckbox id="alunosRemover"
- 		value="#{alunoBean.matriculasAlunosRemover}"> <f:selectItems value="#{alunoBean.alunosMap.keySet}"/>
-		</h:selectManyCheckbox>
 			</h:form>
 		</ui:define>
 	</ui:composition>
